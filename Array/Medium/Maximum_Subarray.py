@@ -1,36 +1,24 @@
-# max_subarray.py
-
-
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution(object):
-    def maxSubArray(self, nums):
+    def removeElements(self, head, val):
         """
-        # Intuition
-        We want the maximum sum of a continuous subarray.
-        Instead of checking all subarrays (O(n^2)), we can keep a running sum
-        and reset it whenever it becomes negative, because a negative sum would
-        only decrease future sums.
-
-        # Approach
-        Use Kadane's Algorithm:
-        - Initialize maxSum = -infinity, currentSum = 0
-        - Loop through each number:
-            - Add it to currentSum
-            - Update maxSum if currentSum > maxSum
-            - If currentSum < 0, reset currentSum to 0
-
-        # Complexity
-        - Time complexity: O(n), we traverse the array once
-        - Space complexity: O(1), we only use a few variables
+        :type head: Optional[ListNode]
+        :type val: int
+        :rtype: Optional[ListNode]
         """
 
-        maxSum = float("-inf")
-        currentSum = 0
+        if not head or not head.next:
+            return head
 
-        for num in nums:
-            currentSum += num
-            if currentSum > maxSum:
-                maxSum = currentSum
-            if currentSum < 0:
-                currentSum = 0
+        current = head
 
-        return maxSum
+        while current.next:
+            current = current.next
+
+            if current.next.val == val:
+                current.next = current.next.next
+        return head
