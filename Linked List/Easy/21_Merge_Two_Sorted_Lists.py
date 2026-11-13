@@ -39,7 +39,7 @@ class Solution(object):
 
             current = current.next
 
-        # attach remaining nodes
+        # attach the remaining nodes
         current.next = list1 if list1 else list2
 
         return head
